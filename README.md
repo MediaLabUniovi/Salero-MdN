@@ -80,16 +80,24 @@ ___
 
 ___
 
-## Modo de implementación
+## <p align="justify"> Modo de implementación </p>
 
-Toda la explicación del código de Arduino viene dada en el propio código en formato de comentarios al lado de cada línea
+<div align="justify">
+
+Toda la explicación del código de Arduino viene dada en el propio código en formato de comentarios al lado de cada línea, [`99danirmoya/Salero-MdN/blob/main/src/main.cpp`](https://github.com/99danirmoya/Salero-MdN/blob/main/src/main.cpp), en formato de comentarios al lado de cada línea
+
+</div>
 
 ___
 ___
 
 ## <p align="justify"> Licencia </p>
 
+<div align="justify">
+
 Este proyecto está licenciado bajo la [GPL-3.0 license](https://github.com/99danirmoya/turtle-bot-neo?tab=GPL-3.0-1-ov-file).
+
+</div>
 
 ___
 
