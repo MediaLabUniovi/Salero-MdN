@@ -37,7 +37,7 @@ ___
 | MPU6050 | 1 |
 | LED rojo | 1 |
 | Resistencia | 1 |
-| Pila de 9V | 2 |
+| Pila de 9V | 1 |
 | Jumpers | Los que hagan falta |
 
 </div>
