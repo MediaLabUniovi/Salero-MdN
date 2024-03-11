@@ -4,7 +4,8 @@
 #include <MPU6050.h>                                 // Librería del acelerómetro
 #include <LowPower.h>                                // Librería del modo de bajo consumo
 
-const int LEDpin = 5;
+const uint8_t LEDpin = 5;
+const uint8_t powerPin = 7;                          // Pin para encender y apagar el acelerómetro ya que consume 10 mA como máximo (20 mA disponibles)
 
 // Constructor del objeto del acelerómetro ------------------------------------------------------------------------------
 MPU6050 mpu;
@@ -25,6 +26,7 @@ void enciendeLED(){
   Serial.println("Salero en uso...");
 
   digitalWrite(LEDpin, HIGH);                        // Pongo el LED a brillar
+  digitalWrite(powerPin, LOW);                       // Apago el acelerómetro
 
   delay(500/prescaler);
   Serial.println("Sleeping...");
@@ -45,16 +47,21 @@ void setup() {
   CLKPR = 0x80;
   CLKPR = 0x04;                                      // Prescaler del reloj dividiendo la velocidad entre 16, ahora a 1 MHz
 
-  Wire.begin();                                      // Inicio el bus I2C
-  mpu.initialize();                                  // Inicio el acelerómetro
-
   pinMode(LEDpin, OUTPUT);
+  pinMode(powerPin, OUTPUT);
 
   digitalWrite(LEDpin, LOW);                         // CUIDADO CON LA POLARIZACIÓN DEL LED CON ÁNODO COMÚN
+  digitalWrite(powerPin, HIGH);
+
+  Wire.begin();                                      // Inicio el bus I2C
+  mpu.initialize();                                  // Inicio el acelerómetro
 }
 
 // LOOP ================================================================================================================
 void loop() {
+  digitalWrite(powerPin, HIGH);
+  delay(500/prescaler);
+
   int16_t ay = mpu.getAccelerationY();               // Función de librería para obtener la aceleración en el eje Y
 
   if (abs(ay) > umbral){                             // Si la aceleración supera al umbral definido
