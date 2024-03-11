@@ -63,6 +63,23 @@ A continuación, se muestra el diagrama de conexiones:
 
 ___
 
+## Carcasa a medida
+
+  <div align="center">
+    <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191934.png" width="600"  style="margin: 10px;"/>
+  </div>
+  <br/>
+  <div align="center">
+    <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191914.png" width="600"  style="margin: 10px;"/>
+  </div>
+  <br/>
+  <div align="center">
+    <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191955.png" width="600"  style="margin: 10px;"/>
+  </div>
+  <br/>
+
+___
+
 ## Modo de implementación
 
 Toda la explicación del código de Arduino viene dada en el propio código en formato de comentarios al lado de cada línea
