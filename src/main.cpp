@@ -5,7 +5,7 @@
 #include <LowPower.h>                                // Librería del modo de bajo consumo
 
 const uint8_t LEDpin = 5;
-const uint8_t powerPin = 7;                          // Pin para encender y apagar el acelerómetro ya que consume 10 mA como máximo (20 mA disponibles)
+const uint8_t powerPin = 10;                         // Pin para encender y apagar el acelerómetro ya que consume 10 mA como máximo (20 mA disponibles)
 
 // Constructor del objeto del acelerómetro ------------------------------------------------------------------------------
 MPU6050 mpu;
@@ -18,27 +18,29 @@ const int umbral = 8000;                             // Umbral para la detecció
 
 // Función que enciende el LED y mete en sleep el micro durante el tiempo que se desee ==================================
 void enciendeLED(){
-  if(debug == 1){                                    // Activo aquí el serial y no en el setup para ahorrar recursos
-    Serial.begin(600*prescaler);                     // Poner serial monitor a baudios*prescaler
+  if(debug == 1){       
+    delay(50/prescaler);                             // Activo aquí el serial y no en el setup para ahorrar recursos
+    Serial.begin(1200*prescaler);                     // Poner serial monitor a baudios*prescaler
   }
 
-  delay(500/prescaler);                              // TODOS LOS DELAYS ANTES DE MENSAJES AL SERIAL SON POR HABER BAJADO LA VELOCIDAD DEL RELOJ
+  delay(50/prescaler);                              // TODOS LOS DELAYS ANTES DE MENSAJES AL SERIAL SON POR HABER BAJADO LA VELOCIDAD DEL RELOJ
   Serial.println("Salero en uso...");
 
   digitalWrite(LEDpin, HIGH);                        // Pongo el LED a brillar
   digitalWrite(powerPin, LOW);                       // Apago el acelerómetro
 
-  delay(500/prescaler);
+  delay(1000/prescaler);
   Serial.println("Sleeping...");
 
-  for (int i = 0 ;  i  <  4 ; i++){                  // Me voy a dormir y, cuidado, el primer parámetro de powerDown está definido y no se puede poner lo que se quiera, por lo que se debe de jugar multiplicando uno de los disponibles en un bucle for (aquí son 4 segundos 4 veces, 16 segundos)
+  for (int i = 0 ;  i  <  1 ; i++){                  // Me voy a dormir y, cuidado, el primer parámetro de powerDown está definido y no se puede poner lo que se quiera, por lo que se debe de jugar multiplicando uno de los disponibles en un bucle for (aquí son 4 segundos 4 veces, 16 segundos)
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
   }
 
   digitalWrite(LEDpin, LOW);                         // Tras despertar apago el LED
-  delay(500/prescaler);
+  delay(50/prescaler);
   Serial.println("Waking up...");
 
+  delay(50/prescaler);
   Serial.end();                                      // Apago el serial para ahorrar recursos
 }
 
@@ -60,6 +62,7 @@ void setup() {
 // LOOP ================================================================================================================
 void loop() {
   digitalWrite(powerPin, HIGH);
+  mpu.initialize();                                  // Inicio el acelerómetro
   delay(500/prescaler);
 
   int16_t ay = mpu.getAccelerationY();               // Función de librería para obtener la aceleración en el eje Y
@@ -70,5 +73,5 @@ void loop() {
     digitalWrite(LEDpin, LOW);                       // De superar el umbral, dejo el LED apagado
   }
 
-  delay(500/prescaler);                              // Delay "de cortesía" para el ciclo del loop
+  delay(50/prescaler);                              // Delay "de cortesía" para el ciclo del loop
 }
