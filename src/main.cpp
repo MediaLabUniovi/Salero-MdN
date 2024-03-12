@@ -12,18 +12,18 @@ MPU6050 mpu;
 
 // Declaración e inicialización de constantes ---------------------------------------------------------------------------
 const uint8_t prescaler = 16;                        // Factor de división del prescaler
-const bool debug = 1;                                // Toggle para activar o desactivar el serial
+const bool debug = false;                                // Toggle para activar o desactivar el serial
 
 const int umbral = 8000;                             // Umbral para la detección de cambio
 
 // Función que enciende el LED y mete en sleep el micro durante el tiempo que se desee ==================================
 void enciendeLED(){
-  if(debug == 1){       
+  if(debug){       
     delay(50/prescaler);                             // Activo aquí el serial y no en el setup para ahorrar recursos
-    Serial.begin(1200*prescaler);                     // Poner serial monitor a baudios*prescaler
+    Serial.begin(1200*prescaler);                    // Poner serial monitor a baudios*prescaler
   }
 
-  delay(50/prescaler);                              // TODOS LOS DELAYS ANTES DE MENSAJES AL SERIAL SON POR HABER BAJADO LA VELOCIDAD DEL RELOJ
+  delay(50/prescaler);                               // TODOS LOS DELAYS ANTES DE MENSAJES AL SERIAL SON POR HABER BAJADO LA VELOCIDAD DEL RELOJ
   Serial.println("Salero en uso...");
 
   digitalWrite(LEDpin, HIGH);                        // Pongo el LED a brillar
@@ -32,7 +32,7 @@ void enciendeLED(){
   delay(1000/prescaler);
   Serial.println("Sleeping...");
 
-  for (int i = 0 ;  i  <  1 ; i++){                  // Me voy a dormir y, cuidado, el primer parámetro de powerDown está definido y no se puede poner lo que se quiera, por lo que se debe de jugar multiplicando uno de los disponibles en un bucle for (aquí son 4 segundos 4 veces, 16 segundos)
+  for (int i = 0 ;  i  <  900 ; i++){                // Me voy a dormir y, cuidado, el primer parámetro de powerDown está definido y no se puede poner lo que se quiera, por lo que se debe de jugar multiplicando uno de los disponibles en un bucle for (aquí son 4 segundos 4 veces, 16 segundos)
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
   }
 
@@ -40,8 +40,10 @@ void enciendeLED(){
   delay(50/prescaler);
   Serial.println("Waking up...");
 
-  delay(50/prescaler);
-  Serial.end();                                      // Apago el serial para ahorrar recursos
+  if(debug){  
+    delay(50/prescaler);
+    Serial.end();                                      // Apago el serial para ahorrar recursos
+  }
 }
 
 // SETUP ===============================================================================================================
