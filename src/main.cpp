@@ -12,7 +12,7 @@ MPU6050 mpu;
 
 // Declaración e inicialización de constantes ---------------------------------------------------------------------------
 const uint8_t prescaler = 16;                        // Factor de división del prescaler
-const bool debug = false;                                // Toggle para activar o desactivar el serial
+const bool debug = false;                            // Toggle para activar o desactivar el serial
 
 const int umbral = 8000;                             // Umbral para la detección de cambio
 
@@ -42,7 +42,7 @@ void enciendeLED(){
 
   if(debug){  
     delay(50/prescaler);
-    Serial.end();                                      // Apago el serial para ahorrar recursos
+    Serial.end();                                    // Apago el serial para ahorrar recursos
   }
 }
 
