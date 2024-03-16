@@ -1,79 +1,167 @@
+/* **********************************************************************************************************************
+SALERO MAR DE NIEBLA V1: aditamento para salero que indica con LEDs cuántas veces se ha echado sal a la comida con un
+máximo de tres veces. Cada vez que se use, los LEDs quedarán encendidos durante una hora y, posteriormente, se entra-
+rá en sleep mode de forma indeterminada. Cuando el botón por inclinación se cierre durante el sleep mode, provocará una
+interrupción que despertará al dispositivo y lo llevará de nuevo al estado inicial de la máquina de estados.
+********************************************************************************************************************** */
+
 // Inclusión de librerías -----------------------------------------------------------------------------------------------
 #include <Arduino.h>
-#include <Wire.h>                                    // Librería para uso del bus I2C
-#include <MPU6050.h>                                 // Librería del acelerómetro
-#include <LowPower.h>                                // Librería del modo de bajo consumo
+#include <LowPower.h>
 
-const uint8_t LEDpin = 5;
-const uint8_t powerPin = 10;                         // Pin para encender y apagar el acelerómetro ya que consume 10 mA como máximo (20 mA disponibles)
-
-// Constructor del objeto del acelerómetro ------------------------------------------------------------------------------
-MPU6050 mpu;
+// Pin number declarations ----------------------------------------------------------------------------------------------
+const uint8_t  greenLEDpin    = 3;
+const uint8_t  yellowLEDpin   = 4;
+const uint8_t  redLEDpin      = 5;
+const uint8_t  incbutPin      = 2;
 
 // Declaración e inicialización de constantes ---------------------------------------------------------------------------
-const uint8_t prescaler = 16;                        // Factor de división del prescaler
-const bool debug = false;                            // Toggle para activar o desactivar el serial
+const bool     debug          = true;                // Toggle para activar o desactivar el serial
+const uint8_t  prescaler      = 16;                  // Factor de división del prescaler
+const uint16_t bloqueo        = 2000/prescaler;      // Tiempo de bloqueo entre aplicaciones de sal
+const uint16_t espera         = 5000/prescaler;      // Intervalo de espera entre usos del salero
+const uint16_t esperaSerial   = 50/prescaler;        // Intevalo de espera antes de un serial print
+const uint16_t esperaPinDig   = 100/prescaler;       // Intervalo de espera después de cambio de estado de pin digital
 
-const int umbral = 8000;                             // Umbral para la detección de cambio
 
-// Función que enciende el LED y mete en sleep el micro durante el tiempo que se desee ==================================
-void enciendeLED(){
-  if(debug){       
-    delay(50/prescaler);                             // Activo aquí el serial y no en el setup para ahorrar recursos
-    Serial.begin(1200*prescaler);                    // Poner serial monitor a baudios*prescaler
-  }
 
-  delay(50/prescaler);                               // TODOS LOS DELAYS ANTES DE MENSAJES AL SERIAL SON POR HABER BAJADO LA VELOCIDAD DEL RELOJ
-  Serial.println("Salero en uso...");
+// Declaración e inicialización de variables
+uint8_t        salCount       = 0;                   // Indicador de cuántas veces se ha echado sal
+unsigned long  previousMillis = 0;                   // Variable para guardar el estado previo de la función millis
 
-  digitalWrite(LEDpin, HIGH);                        // Pongo el LED a brillar
-  digitalWrite(powerPin, LOW);                       // Apago el acelerómetro
-
-  delay(1000/prescaler);
-  Serial.println("Sleeping...");
-
-  for (int i = 0 ;  i  <  900 ; i++){                // Me voy a dormir y, cuidado, el primer parámetro de powerDown está definido y no se puede poner lo que se quiera, por lo que se debe de jugar multiplicando uno de los disponibles en un bucle for (aquí son 4 segundos 4 veces, 16 segundos)
-    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
-  }
-
-  digitalWrite(LEDpin, LOW);                         // Tras despertar apago el LED
-  delay(50/prescaler);
-  Serial.println("Waking up...");
-
-  if(debug){  
-    delay(50/prescaler);
-    Serial.end();                                    // Apago el serial para ahorrar recursos
-  }
-}
+// SUBRUTINA DE LA INTERRUPCIÓN ----------------------------------------------------------------------------------------
+void incbutAct(){
+}                                                    // Vacía porque sólo quiero que despierte el micro
 
 // SETUP ===============================================================================================================
 void setup() {
   CLKPR = 0x80;
-  CLKPR = 0x04;                                      // Prescaler del reloj dividiendo la velocidad entre 16, ahora a 1 MHz
+  CLKPR = 0x04;                                      // Prescaler del reloj dividiendo la velocidad entre 2, ahora a 8 MHz
 
-  pinMode(LEDpin, OUTPUT);
-  pinMode(powerPin, OUTPUT);
+  if(debug){
+    delay(esperaSerial);                             // Delay para que el serial se sincronice dada la bajada de velocidad del reloj
+    Serial.begin(1200*prescaler);                    // Poner serial monitor a baudios*prescaler
+  }
 
-  digitalWrite(LEDpin, LOW);                         // CUIDADO CON LA POLARIZACIÓN DEL LED CON ÁNODO COMÚN
-  digitalWrite(powerPin, HIGH);
+  // Pin modes
+  pinMode(greenLEDpin, OUTPUT);
+  pinMode(yellowLEDpin, OUTPUT);
+  pinMode(redLEDpin, OUTPUT);
+  pinMode(incbutPin, INPUT);
 
-  Wire.begin();                                      // Inicio el bus I2C
-  mpu.initialize();                                  // Inicio el acelerómetro
+  // Modo de inicio de los pines
+  digitalWrite(greenLEDpin, LOW);
+  digitalWrite(yellowLEDpin, LOW);
+  digitalWrite(redLEDpin, LOW);
+  delay(esperaPinDig);                               // Delay de cortesía para cambiar estados digitales por la bajada de velocidad del reloj
+
+  // Interrupción por input en pin digital
+  attachInterrupt(0, incbutAct, RISING);             // Añado la interrupción al pin 2, referido a 0, para que ejecture la ISR cuando haya un flanco ascendente
+
+  delay(esperaSerial);
+  Serial.println("Salero MdN inicializado");
 }
 
 // LOOP ================================================================================================================
 void loop() {
-  digitalWrite(powerPin, HIGH);
-  mpu.initialize();                                  // Inicio el acelerómetro
-  delay(500/prescaler);
+  unsigned long currentMillis = millis();
 
-  int16_t ay = mpu.getAccelerationY();               // Función de librería para obtener la aceleración en el eje Y
+  // Máquina de estados Salero Mar de Niebla ---------------------------------------------------------------------------
+  switch(salCount){
 
-  if (abs(ay) > umbral){                             // Si la aceleración supera al umbral definido
-    enciendeLED();                                   // llamo a la función del indicativo luminoso
-  }else{
-    digitalWrite(LEDpin, LOW);                       // De superar el umbral, dejo el LED apagado
+    // Caso 0: Aún no se ha echado sal ninguna vez ---------------------------------------------------------------------
+    case 0:
+      if(digitalRead(incbutPin) == HIGH){
+        Serial.println("Primera vez echada");
+
+        digitalWrite(greenLEDpin, HIGH);
+        delay(esperaPinDig);
+
+        salCount++;
+
+        delay(bloqueo);                              // Delay para bloquear que se cuente echar sal más de una vez a cada una de las veces
+      }
+      break;
+    // Caso 1: Se ha echado sal una vez --------------------------------------------------------------------------------
+    case 1:
+      if(currentMillis - previousMillis >= espera){  // Si despues de echar sal una vez pasa 1h, se vuelve al estado inicial
+        previousMillis = currentMillis;
+        
+        digitalWrite(greenLEDpin, LOW);
+
+        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 -----------------------------------------------
+        delay(esperaSerial);
+        Serial.println("Me voy a dormir...");
+        LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+        delay(esperaSerial);
+        Serial.println("¡Me he despertado!");
+        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ---------------------------------------------------------
+
+        salCount = 0;
+      }
+      else if(digitalRead(incbutPin) == HIGH){
+        Serial.println("Segunda vez echada");
+
+        digitalWrite(yellowLEDpin, HIGH);
+        delay(esperaPinDig);
+
+        salCount++;
+        delay(bloqueo);
+      }
+      break;
+
+    // Caso 2: Se ha echado sal dos veces -----------------------------------------------------------------------------
+    case 2:
+      if(currentMillis - previousMillis >= espera){  // Si despues de echar sal dos veces pasa 1h, se vuelve al estado inicial
+        previousMillis = currentMillis;
+
+        digitalWrite(greenLEDpin, LOW);
+        digitalWrite(yellowLEDpin, LOW);
+
+        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 -----------------------------------------------
+        delay(esperaSerial);
+        Serial.println("Me voy a dormir...");
+        LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+        delay(esperaSerial);
+        Serial.println("¡Me he despertado!");
+        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ---------------------------------------------------------
+
+        salCount = 0;
+      }
+      else if(digitalRead(incbutPin) == HIGH){
+        Serial.println("Tercera vez echada");
+
+        digitalWrite(redLEDpin, HIGH);
+        delay(esperaPinDig);
+
+        salCount++;
+        delay(2000/prescaler);
+      }
+      break;
+
+    // Caso 3: Se ha echado sal tres veces ----------------------------------------------------------------------------
+    case 3:
+      unsigned long tiempoInicio = millis();
+      while(millis() - tiempoInicio < espera){          // Después de echar sal tres veces mantengo el sistema como está 1h
+        previousMillis = currentMillis;
+      }
+
+      digitalWrite(greenLEDpin, LOW);                   // Apago todos los LEDs
+      digitalWrite(yellowLEDpin, LOW);
+      digitalWrite(redLEDpin, LOW);
+      delay(esperaPinDig);
+
+      // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 -----------------------------------------------
+      delay(esperaSerial);
+      Serial.println("Me voy a dormir...");
+      LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+      delay(esperaSerial);
+      Serial.println("¡Me he despertado!");
+      // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ---------------------------------------------------------
+
+      salCount = 0;                                  
+      break;
   }
 
-  delay(50/prescaler);                              // Delay "de cortesía" para el ciclo del loop
+  delay(50/prescaler);
 }
