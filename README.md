@@ -1,6 +1,6 @@
 ![Static Badge](https://img.shields.io/badge/estabilidad-ALPHA-3314333)
 
-# <p align="center"> Salero MdN </p>
+# <p align="center"> Salero Jóven Ocúpate Reto TicLab MdN </p>
 
 <div align="center">
   <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/thumbnail_logo_blanco.png" width="100"><img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/logo_mar-de-niebla-300x156.jpg" width="130">
