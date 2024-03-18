@@ -58,7 +58,7 @@ A continuación, se muestra el diagrama de conexiones:
 </div>
 
 <div align="center">
-  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/salero_schematic.jpg" width="750"  style="margin: 10px;"/>
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/salero_schematic.png" width="750"  style="margin: 10px;"/>
   
   <em>Salero memorístico</em>
 </div>
