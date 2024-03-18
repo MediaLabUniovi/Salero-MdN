@@ -18,9 +18,13 @@ ___
 
 ## Modo de funcionamiento
 1. Se enciende el salero
-1. El LED estará apagado, esperando a que el salero sea agitado
-1. Cuando se haga uso, el LED se encenderá y se activará el modo sleep durante el tiempo que el usuario vea conveniente
-1. Se apaga el LED y vuelta a esperar a ser usado
+1. Los LEDs estarán apagados, esperando a que el salero sea agitado
+1. Cuando se haga uso, el primer LED se encenderá y se mantendrá por una hora
+1. Si no se usa en ese tiempo, se apagará el LED y se activará el modo sleep indeterminadamente hasta que el usuario vuelva a hacer uso del salero, reiniciando la cuenta
+1. Si se usa antes de que pase la hora, se encenderá el segundo LED indicando que se ha aplicado 2 veces sal
+1. Se temporiza 1 hora de nuevo, esperándose a un nuevo uso o apando los LEDs y volviendo a sleep mode si no se usa, reiniciando la cuenta
+1. Si se usa, se añade el tercer LED indicando la tercera y última aplicación de sal. Obligatoriamente se temporiza 1 hora con ellos encendidos para apagarse y entrar en sleep mode después
+1. Se reinicia la cuenta dándose por entendido que la siguiente vez que se use el salero, será para la siguiente comida/cena
 
 ___
 
