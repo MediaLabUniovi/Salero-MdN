@@ -72,7 +72,7 @@ A continuación, se muestra el diagrama de conexiones:
 
 ___
 
-### <p align="justify"> Flujograma (¡Simplificado!) [:leftwards_arrow_with_hook:](https://github.com/medialablpwan/droneloraminiairqualitystation/blob/main/README.md#%C3%ADndice) </p>
+### <p align="justify"> Flujograma (¡Simplificado!) </p>
 
 ```mermaid
 graph TD;
@@ -139,11 +139,11 @@ Este proyecto está licenciado bajo la [GPL-3.0 license](https://github.com/99da
 
 ___
 
-### <p align="justify"> Contacto [:leftwards_arrow_with_hook:](https://github.com/medialablpwan/droneloraminiairqualitystation/blob/main/README.md#%C3%ADndice) </p>
+## <p align="justify"> Contacto </p>
 
-> [!IMPORTANT]
+> [!NOTE]
 > Responderemos amablemente a dudas y leeremos sugerencias: [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:medialablpwan@gmail.com)](mailto:medialablpwan@gmail.com)
 > 
 > Más información sobre nuestras actividades: [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/groups/9298597/)](https://www.linkedin.com/groups/9298597/)
 
-_<p align="justify"> Autores: Daniel Rodríguez Moya, Iván Graña y el grupo de trabajo de MediaLab\_ LPWAN :shipit: </p>_
+_<p align="justify"> Autores: Daniel Rodríguez Moya y el grupo de trabajo de TicLab Jóven Ocúpate, Mar de Niebla :shipit: </p>_
