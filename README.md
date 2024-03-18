@@ -149,4 +149,9 @@ ___
 > 
 > Más información sobre nuestras actividades: [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/groups/9298597/)](https://www.linkedin.com/groups/9298597/)
 
+<div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/-5976428790768845376_121.jpg" width="600">
+</div>
+<br/>
+
 _<p align="justify"> Autores: Daniel Rodríguez Moya y el grupo de trabajo de TicLab Jóven Ocúpate, Mar de Niebla :shipit: </p>_
