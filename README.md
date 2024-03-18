@@ -41,6 +41,7 @@ ___
 | LED rojo | 1 |
 | Resistencias 2K2 | 3 |
 | Batería 18650 | 1 |
+| Porta-batería | 1 |
 | TP4056 | 1 |
 | Jumpers | Los que hagan falta |
 
