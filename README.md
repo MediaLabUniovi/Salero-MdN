@@ -138,7 +138,6 @@ Toda la explicación del código de Arduino viene dada en el propio código en f
 </div>
 
 ___
-___
 
 ## <p align="justify"> Licencia </p>
 
