@@ -67,7 +67,7 @@ A continuación, se muestra el diagrama de conexiones:
 </div>
 
 <div align="center">
-  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/salero_schematic.png" width="600"  style="margin: 10px;"/>
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/salero_schematic.png" width="450"  style="margin: 10px;"/>
   
   <em>Salero memorístico</em>
 </div>
@@ -106,18 +106,26 @@ ___
 
 ## Carcasa a medida
 
-  <div align="center">
-    <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191934.png" width="600"  style="margin: 10px;"/>
-  </div>
-  <br/>
-  <div align="center">
-    <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191914.png" width="600"  style="margin: 10px;"/>
-  </div>
-  <br/>
-  <div align="center">
-    <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191955.png" width="600"  style="margin: 10px;"/>
-  </div>
-  <br/>
+<div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191934.png" width="600"  style="margin: 10px;"/>
+
+  <em>Dosificador</em>
+</div>
+<br/>
+  
+<div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191914.png" width="600"  style="margin: 10px;"/>
+
+  <em>Recipiente de sal</em>
+</div>
+<br/>
+  
+<div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191955.png" width="600"  style="margin: 10px;"/>
+
+  <em>Contenedor de electrónica</em>
+</div>
+<br/>
 
 ___
 
