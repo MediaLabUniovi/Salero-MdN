@@ -63,6 +63,34 @@ A continuación, se muestra el diagrama de conexiones:
 
 ___
 
+### <p align="justify"> Flujograma (¡Simplificado!) [:leftwards_arrow_with_hook:](https://github.com/medialablpwan/droneloraminiairqualitystation/blob/main/README.md#%C3%ADndice) </p>
+
+```mermaid
+graph TD;
+  A[Configuración inicial] -->|1| B(LEDs apagados)
+  B -->|2| C(¿Eché sal?)
+  C -->|3| D(Sí)
+  C -->|4| E(No)
+  E -->|5| G(Me voy a dormir)
+  G -->|6| B
+  D -->|6| H(Enciendo el primer LED)
+  H -->|7| I(¿Eché sal en menos de 1 hora?)
+  I -->|8| J(Sí)
+  I -->|9| K(No)
+  K -->|10| G
+  J -->|11| L(Enciendo el primer y segundo LED)
+  L -->|12| M(¿Eché sal en menos de 1 hora?)
+  M -->|13| N(Sí)
+  M -->|14| O(No)
+  N -->|15| P(Enciendo los 3 LEDs)
+  O -->|16| G
+  P -->|17| R(Pasa 1 hora)
+  R -->|18| B
+  
+```
+
+___
+
 ## Carcasa a medida
 
   <div align="center">
