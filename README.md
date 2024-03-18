@@ -98,7 +98,7 @@ graph TD;
   N -->|17| P(Enciendo los 3 LEDs)
   O -->|18| G
   P -->|19| R(Pasa 1 hora)
-  R -->|20| S
+  R -->|20| G
   
 ```
 
