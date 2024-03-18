@@ -3,6 +3,11 @@
 # <p align="center"> Salero MdN </p>
 
 <div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/thumbnail_logo_blanco.png" width="100"><img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/logo_mar-de-niebla-300x156.jpg" width="130">
+</div>
+<br/>
+
+<div align="center">
 
 _Hecho con_
 
