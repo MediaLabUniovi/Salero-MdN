@@ -139,7 +139,7 @@ Este proyecto está licenciado bajo la [GPL-3.0 license](https://github.com/99da
 
 ___
 
-## <p align="justify"> Contacto </p>
+### <p align="justify"> Contacto </p>
 
 > [!IMPORTANT]
 > Respondo amablemente a dudas y leo sugerencias: [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:daniel.rodriguezm99@gmail.com)](mailto:daniel.rodriguezm99@gmail.com)
