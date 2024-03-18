@@ -34,10 +34,14 @@ ___
 | ------------- | ------------- |
 | Arduino NANO | 1 |
 | Protoboard | 1 |
-| MPU6050 | 1 |
+| Botón de inclinación | 1 |
+| Botón | 1 |
+| LED verde | 1 |
+| LED amarillo | 1 |
 | LED rojo | 1 |
-| Resistencia | 1 |
-| Pila de 9V | 1 |
+| Resistencias 2K2 | 3 |
+| Batería 18650 | 1 |
+| TP4056 | 1 |
 | Jumpers | Los que hagan falta |
 
 </div>
