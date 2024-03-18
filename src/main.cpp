@@ -3,7 +3,9 @@ SALERO MAR DE NIEBLA V1: aditamento para saleros que indica por medio de un swit
 se ha echado sal a la comida con un máximo de tres veces. Cada vez que se use, los LEDs quedarán encendidos durante una
 hora y, posteriormente, se entrará en sleep mode de forma indeterminada. Cuando el botón por inclinación se cierre
 durante el sleep mode, provocará una interrupción que despertará al dispositivo y lo llevará de nuevo al estado inicial
-de la máquina de estados.
+de la máquina de estados. El consumo se ha estudiado para que se consuman 10 microamperios durante el sleep mode y unos
+70 microamperios en funcionamiento, conseguido por medio de bajar la velocidad del reloj del Atmel a 1MHz, la implemen-
+tación del sleep mode y la desconexión del LED de PWR tras quitar su resistencia.
 ********************************************************************************************************************** */
 
 // Inclusión de librerías -----------------------------------------------------------------------------------------------
@@ -20,7 +22,7 @@ const uint8_t  incbutPin      = 2;
 const bool     debug          = true;                        // Toggle para activar o desactivar el serial
 const uint8_t  prescaler      = 16;                          // Factor de división del prescaler
 const uint16_t bloqueo        = 2000/prescaler;              // Tiempo de bloqueo entre aplicaciones de sal
-const uint16_t espera         = 5000/prescaler;              // Intervalo de espera entre usos del salero
+const uint16_t espera         = 30000/prescaler;             // Intervalo de espera entre usos del salero
 const uint16_t esperaSerial   = 50/prescaler;                // Intevalo de espera antes de un serial print
 const uint16_t esperaPinDig   = 100/prescaler;               // Intervalo de espera después de cambio de estado de pin digital
 
@@ -46,7 +48,7 @@ void setup() {
   pinMode(greenLEDpin, OUTPUT);
   pinMode(yellowLEDpin, OUTPUT);
   pinMode(redLEDpin, OUTPUT);
-  pinMode(incbutPin, INPUT);
+  pinMode(incbutPin, INPUT_PULLUP);                          // Uso INPUT_PULLUP para simplificar el circuito, LÓGICA INVERTIDA
 
   // Modo de inicio de los pines
   digitalWrite(greenLEDpin, LOW);
@@ -55,7 +57,7 @@ void setup() {
   delay(esperaPinDig);                                       // Delay de cortesía para cambiar estados digitales por la bajada de velocidad del reloj
 
   // Interrupción por input en pin digital
-  attachInterrupt(0, incbutAct, RISING);                     // Añado la interrupción al pin 2, referido como INT0, para que ejectute la Interruption Service Routine (ISR) cuando haya un flanco ascendente
+  attachInterrupt(0, incbutAct, FALLING);                    // Añado la interrupción al pin 2, referido como INT0, para que ejectute la Interruption Service Routine (ISR) cuando haya un flanco descendente (por ser INPUT_PULLUP, al presionar pasa de 1 a 0)
 
   delay(esperaSerial);
   Serial.println("Salero MdN inicializado");
@@ -70,7 +72,7 @@ void loop() {
 
     // Caso 0: Aún no se ha echado sal ninguna vez ----------------------------------------------------------------------
     case 0:
-      if(digitalRead(incbutPin) == HIGH){
+      if(digitalRead(incbutPin) == !HIGH){                   // RECUERDA, todo lo referido al switch de inclinación va con lógica invertida
         Serial.println("Primera vez echada");
 
         digitalWrite(greenLEDpin, HIGH);
@@ -87,6 +89,7 @@ void loop() {
         previousMillis = currentMillis;
         
         digitalWrite(greenLEDpin, LOW);                      // Apago el LED (o LEDs acumulados posteriormente)
+        delay(esperaPinDig);
 
         // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
         delay(esperaSerial);
@@ -98,7 +101,7 @@ void loop() {
 
         salCount = 0;                                        // Reinicio la máquina de estados
       }
-      else if(digitalRead(incbutPin) == HIGH){               // Si por el contrario, se detencta el switch de inclinación en HIGH, es que le eché sal
+      else if(digitalRead(incbutPin) == !HIGH){               // Si por el contrario, se detencta el switch de inclinación en HIGH, es que le eché sal
         Serial.println("Segunda vez echada");
 
         digitalWrite(yellowLEDpin, HIGH);                    // Añado ahora el segundo LED
@@ -116,6 +119,7 @@ void loop() {
 
         digitalWrite(greenLEDpin, LOW);
         digitalWrite(yellowLEDpin, LOW);
+        delay(esperaPinDig);
 
         // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
         delay(esperaSerial);
@@ -127,7 +131,7 @@ void loop() {
 
         salCount = 0;
       }
-      else if(digitalRead(incbutPin) == HIGH){
+      else if(digitalRead(incbutPin) == !HIGH){
         Serial.println("Tercera vez echada");
 
         digitalWrite(redLEDpin, HIGH);
