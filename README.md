@@ -84,15 +84,15 @@ graph TD;
   S -->|16| T(INTERRUPCIÓN)
   T -->|17| B
   B -->|2| H(Enciendo el primer LED)
-  H -->|3| I(¿Eché sal en menos de 1 hora?)
+  H -->|3| I(¿Volví a echar sal en menos de 1 hora?)
   I -->|4| J(Sí)
   I -->|5| K(No)
   K -->|12| G(Apago los LEDs)
-  J -->|6| L(Enciendo el primer y segundo LED)
-  L -->|7| M(¿Eché sal en menos de 1 hora?)
+  J -->|6| L(Añado el segundo LED)
+  L -->|7| M(¿Volví a echar sal en menos de 1 hora?)
   M -->|8| N(Sí)
   M -->|10| O(No)
-  N -->|9| P(Enciendo los 3 LEDs)
+  N -->|9| P(Añado el tercer LED)
   O -->|13| G
   P -->|11| R(Pasa 1 hora)
   R -->|14| G
