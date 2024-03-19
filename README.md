@@ -79,20 +79,20 @@ ___
 
 ```mermaid
 graph TD;
-  A[Configuración inicial: LEDs apagados] -->|1| B(Eché sal)
-  G -->|15| S(Me voy a dormir)
+  A[Configuración inicial: LEDs apagados] -->|1| B(Se echó sal)
+  G -->|15| S(Sleep mode)
   S -->|16| T(INTERRUPCIÓN)
   T -->|17| B
-  B -->|2| H(Enciendo el primer LED)
-  H -->|3| I(¿Volví a echar sal en menos de 1 hora?)
+  B -->|2| H(Se enciende el primer LED)
+  H -->|3| I(¿Se echó sal mas de 1 vez en la última hora?)
   I -->|4| J(Sí)
   I -->|5| K(No)
-  K -->|12| G(Apago los LEDs)
-  J -->|6| L(Añado el segundo LED)
-  L -->|7| M(¿Volví a echar sal en menos de 1 hora?)
+  K -->|12| G(Se apagan los LEDs)
+  J -->|6| L(Se añade el segundo LED)
+  L -->|7| M(¿Se echó sal mas de 2 veces en la última hora?)
   M -->|8| N(Sí)
   M -->|10| O(No)
-  N -->|9| P(Añado el tercer LED)
+  N -->|9| P(Se añade el tercer LED)
   O -->|13| G
   P -->|11| R(Pasa 1 hora)
   R -->|14| G
