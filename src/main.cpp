@@ -23,7 +23,7 @@ const bool     debug          = true;                        // Toggle para acti
 const uint8_t  prescaler      = 16;                          // Factor de división del prescaler
 const uint16_t bloqueo        = 2000/prescaler;              // Tiempo de bloqueo entre aplicaciones de sal
 const uint16_t espera         = 30000/prescaler;             // Intervalo de espera entre usos del salero
-const uint16_t esperaSerial   = 50/prescaler;                // Intevalo de espera antes de un serial print
+const uint16_t esperaSerial   = 100/prescaler;               // Intevalo de espera antes de un serial print
 const uint16_t esperaPinDig   = 100/prescaler;               // Intervalo de espera después de cambio de estado de pin digital
 
 // Declaración e inicialización de variables
@@ -40,8 +40,8 @@ void setup() {
   CLKPR = 0x04;                                              // Prescaler del reloj dividiendo la velocidad entre 2, ahora a 8 MHz
 
   if(debug){
-    delay(esperaSerial);                                     // Delay para que el serial se sincronice dada la bajada de velocidad del reloj
     Serial.begin(1200*prescaler);                            // Poner serial monitor a baudios*prescaler
+    delay(esperaSerial);                                     // Delay para que el serial se sincronice dada la bajada de velocidad del reloj
   }
 
   // Pin modes
@@ -74,6 +74,7 @@ void loop() {
     case 0:
       if(digitalRead(incbutPin) == !HIGH){                   // RECUERDA, todo lo referido al switch de inclinación va con lógica invertida
         Serial.println("Primera vez echada");
+        delay(esperaSerial);
 
         digitalWrite(greenLEDpin, HIGH);
         delay(esperaPinDig);                                 // Con pequeño delay para estabilizar el pin
@@ -83,26 +84,29 @@ void loop() {
         delay(bloqueo);                                      // Delay para bloquear que se cuente echar sal más de una vez a cada una de las veces
       }
       break;
+
     // Caso 1: Se ha echado sal una vez ---------------------------------------------------------------------------------
     case 1:
       if(currentMillis - previousMillis >= espera){          // Si despues de echar sal una vez pasa 1h, se vuelve al estado inicial
         previousMillis = currentMillis;
         
+        Serial.println("Me voy a dormir...");
+        delay(esperaSerial);
+
         digitalWrite(greenLEDpin, LOW);                      // Apago el LED (o LEDs acumulados posteriormente)
         delay(esperaPinDig);
 
         // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
-        delay(esperaSerial);
-        Serial.println("Me voy a dormir...");
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
-        delay(esperaSerial);
         Serial.println("¡Me he despertado!");
+        delay(esperaSerial);
         // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 --------------------------------------------------------
 
         salCount = 0;                                        // Reinicio la máquina de estados
       }
-      else if(digitalRead(incbutPin) == !HIGH){               // Si por el contrario, se detencta el switch de inclinación en HIGH, es que le eché sal
+      else if(digitalRead(incbutPin) == !HIGH){              // Si por el contrario, se detencta el switch de inclinación en HIGH, es que le eché sal
         Serial.println("Segunda vez echada");
+        delay(esperaSerial);
 
         digitalWrite(yellowLEDpin, HIGH);                    // Añado ahora el segundo LED
         delay(esperaPinDig);
@@ -117,22 +121,24 @@ void loop() {
       if(currentMillis - previousMillis >= espera){          // Si despues de echar sal dos veces pasa 1h, se vuelve al estado inicial. Igual que en el estado anterior, pero ahora se apagan los LEDs acumulados
         previousMillis = currentMillis;
 
+        Serial.println("Me voy a dormir...");
+        delay(esperaSerial);
+
         digitalWrite(greenLEDpin, LOW);
         digitalWrite(yellowLEDpin, LOW);
         delay(esperaPinDig);
 
         // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
-        delay(esperaSerial);
-        Serial.println("Me voy a dormir...");
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
-        delay(esperaSerial);
         Serial.println("¡Me he despertado!");
+        delay(esperaSerial);
         // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 --------------------------------------------------------
 
         salCount = 0;
       }
       else if(digitalRead(incbutPin) == !HIGH){
         Serial.println("Tercera vez echada");
+        delay(esperaSerial);
 
         digitalWrite(redLEDpin, HIGH);
         delay(esperaPinDig);
@@ -144,26 +150,27 @@ void loop() {
 
     // Caso 3: Se ha echado sal tres veces -----------------------------------------------------------------------------
     case 3:
-      unsigned long tiempoInicio = millis();
-      while(millis() - tiempoInicio < espera){               // Después de echar sal tres veces mantengo el sistema como está 1h
+      if(currentMillis - previousMillis >= espera){          // Después de echar sal tres veces mantengo el sistema como está 1h
         previousMillis = currentMillis;
-      }
 
-      digitalWrite(greenLEDpin, LOW);                        // Apago todos los LEDs
-      digitalWrite(yellowLEDpin, LOW);
-      digitalWrite(redLEDpin, LOW);
-      delay(esperaPinDig);
+        Serial.println("Me voy a dormir...");
+        delay(esperaSerial);
 
-      // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ------------------------------------------------
-      delay(esperaSerial);
-      Serial.println("Me voy a dormir...");
-      LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
-      delay(esperaSerial);
-      Serial.println("¡Me he despertado!");
-      // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------------------
+        digitalWrite(greenLEDpin, LOW);                      // Apago todos los LEDs
+        digitalWrite(yellowLEDpin, LOW);
+        digitalWrite(redLEDpin, LOW);
+        delay(esperaPinDig);
 
-      salCount = 0;                                  
+        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
+        LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+        delay(esperaSerial);
+        Serial.println("¡Me he despertado!");
+        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 --------------------------------------------------------
+
+        salCount = 0;
+      }                                
       break;
+      
   }
 
   delay(50/prescaler);                                       // Delay de cortesía de la función loop
