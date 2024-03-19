@@ -80,7 +80,6 @@ void loop() {
         delay(esperaPinDig);                                 // Con pequeño delay para estabilizar el pin
 
         salCount++;                                          // Se aumenta la variable para el cambio de estado
-
         delay(bloqueo);                                      // Delay para bloquear que se cuente echar sal más de una vez a cada una de las veces
       }
       break;
