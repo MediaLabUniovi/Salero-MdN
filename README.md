@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/estabilidad-PRERELEASE-3314333)
+![Static Badge](https://img.shields.io/badge/Estabilidad-V1.0-3314333)
 
 # <p align="center"> Salero Jóven Ocúpate Reto TicLab MdN </p>
 
