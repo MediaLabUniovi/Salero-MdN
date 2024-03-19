@@ -80,22 +80,22 @@ ___
 ```mermaid
 graph TD;
   A[Configuración inicial: LEDs apagados] -->|1| B(Eché sal)
-  G -->|6| S(Me voy a dormir)
-  S -->|7| T(INTERRUPCIÓN)
-  T -->|21| B
-  B -->|8| H(Enciendo el primer LED)
-  H -->|9| I(¿Eché sal en menos de 1 hora?)
-  I -->|10| J(Sí)
-  I -->|11| K(No)
-  K -->|5| G(Apago los LEDs)
-  J -->|13| L(Enciendo el primer y segundo LED)
-  L -->|14| M(¿Eché sal en menos de 1 hora?)
-  M -->|15| N(Sí)
-  M -->|16| O(No)
-  N -->|17| P(Enciendo los 3 LEDs)
-  O -->|18| G
-  P -->|19| R(Pasa 1 hora)
-  R -->|20| G
+  G -->|15| S(Me voy a dormir)
+  S -->|16| T(INTERRUPCIÓN)
+  T -->|17| B
+  B -->|2| H(Enciendo el primer LED)
+  H -->|3| I(¿Eché sal en menos de 1 hora?)
+  I -->|4| J(Sí)
+  I -->|5| K(No)
+  K -->|12| G(Apago los LEDs)
+  J -->|6| L(Enciendo el primer y segundo LED)
+  L -->|7| M(¿Eché sal en menos de 1 hora?)
+  M -->|8| N(Sí)
+  M -->|10| O(No)
+  N -->|9| P(Enciendo los 3 LEDs)
+  O -->|13| G
+  P -->|11| R(Pasa 1 hora)
+  R -->|14| G
   
 ```
 
