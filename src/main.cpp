@@ -1,11 +1,11 @@
 /* **********************************************************************************************************************
-SALERO MAR DE NIEBLA V1: aditamento para saleros que indica por medio de un switch de inclinación con LEDs cuántas veces
-se ha echado sal a la comida con un máximo de tres veces. Cada vez que se use, los LEDs quedarán encendidos durante una
-hora y, posteriormente, se entrará en sleep mode de forma indeterminada. Cuando el botón por inclinación se cierre
-durante el sleep mode, provocará una interrupción que despertará al dispositivo y lo llevará de nuevo al estado inicial
-de la máquina de estados. El consumo se ha estudiado para que se consuman 10 microamperios durante el sleep mode y unos
-70 microamperios en funcionamiento, conseguido por medio de bajar la velocidad del reloj del Atmel a 1MHz, la implemen-
-tación del sleep mode y la desconexión del LED de PWR tras quitar su resistencia.
+SALERO MAR DE NIEBLA v1 - Carmen: aditamento para saleros que indica por medio de un switch de inclinación con LEDs
+cuántas veces se ha echado sal a la comida con un máximo de tres veces. Cada vez que se use, los LEDs quedarán encendidos
+durante una hora y, posteriormente, se entrará en sleep mode de forma indeterminada. Cuando el botón por inclinación se
+cierre durante el sleep mode, provocará una interrupción que despertará al dispositivo y lo llevará de nuevo al estado
+inicial de la máquina de estados. El consumo se ha estudiado para que se consuman 10 microamperios durante el sleep mode
+y unos 70 microamperios en funcionamiento, conseguido por medio de bajar la velocidad del reloj del Atmel a 1MHz, la
+implemen tación del sleep mode y la desconexión del LED de PWR tras quitar su resistencia.
 ********************************************************************************************************************** */
 
 // Inclusión de librerías -----------------------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ const uint8_t  incbutPin      = 2;
 // Declaración e inicialización de constantes ---------------------------------------------------------------------------
 const bool     debug          = true;                        // Toggle para activar o desactivar el serial
 const uint8_t  prescaler      = 16;                          // Factor de división del prescaler
-const uint16_t bloqueo        = 2000/prescaler;              // Tiempo de bloqueo entre aplicaciones de sal
-const uint16_t espera         = 30000/prescaler;             // Intervalo de espera entre usos del salero
+const uint16_t bloqueo        = 2000/prescaler;              // Tiempo de bloqueo entre aplicaciones de sal - RECOMENDADO 5 SEGUNDOS
+const uint16_t espera         = 30000/prescaler;             // Intervalo de espera entre usos del salero -  RECOMENDADO 1 HORA
 const uint16_t esperaSerial   = 100/prescaler;               // Intevalo de espera antes de un serial print
 const uint16_t esperaPinDig   = 100/prescaler;               // Intervalo de espera después de cambio de estado de pin digital
 
