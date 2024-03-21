@@ -124,6 +124,9 @@ ___
 </div>
 <br/>
 
+> [!WARNING]
+> Los modelos de las imágenes son experimentales y aún están siendo trabajados
+
 ___
 
 ## <p align="justify"> Modo de implementación </p>
