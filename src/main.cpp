@@ -16,7 +16,7 @@ implemen tación del sleep mode y la desconexión del LED de PWR tras quitar su 
 const uint8_t  greenLEDpin    = 3;
 const uint8_t  yellowLEDpin   = 4;
 const uint8_t  redLEDpin      = 5;
-const uint8_t  incbutPin      = 2;
+const uint8_t  incbutPin      = 2;                           // SWITCH DE INCLINACIÓN AL D2 PORQUE ADMITE INTERRUPCIÓN
 
 // Declaración e inicialización de constantes ---------------------------------------------------------------------------
 const bool     debug          = true;                        // Toggle para activar o desactivar el serial
@@ -30,33 +30,34 @@ const uint16_t esperaPinDig   = 100/prescaler;               // Intervalo de esp
 uint8_t        salCount       = 0;                           // Indicador de cuántas veces se ha echado sal
 unsigned long  previousMillis = 0;                           // Variable para guardar el estado previo de la función millis
 
-// SUBRUTINA DE LA INTERRUPCIÓN -----------------------------------------------------------------------------------------
+// SUBRUTINA DE LA INTERRUPCIÓN =========================================================================================
 void incbutAct(){
 }                                                            // Vacía porque sólo quiero que despierte el micro
 
 // SETUP ================================================================================================================
 void setup() {
+  // Clock prescaler - [0x00 16 MHz] [0x01 8 MHz] [0x02 4 MHz] [0x03 2 MHz] [0x04 1 MHz] --------------------------------
   CLKPR = 0x80;
-  CLKPR = 0x04;                                              // Prescaler del reloj dividiendo la velocidad entre 2, ahora a 8 MHz
+  CLKPR = 0x04;                                              // Prescaler del reloj dividiendo la velocidad entre 16, ahora a 1 MHz
 
   if(debug){
-    Serial.begin(1200*prescaler);                            // Poner serial monitor a baudios*prescaler
+    Serial.begin(1200*prescaler);                            // Poner serial monitor a 1200*prescaler. 1200 PORQUE ES LO MÁS RÁPIDO CON LO QUE FUNCIONA AL FUNCIONAR A 1 MHz
     delay(esperaSerial);                                     // Delay para que el serial se sincronice dada la bajada de velocidad del reloj
   }
 
-  // Pin modes
+  // Pin modes ----------------------------------------------------------------------------------------------------------
   pinMode(greenLEDpin, OUTPUT);
   pinMode(yellowLEDpin, OUTPUT);
   pinMode(redLEDpin, OUTPUT);
   pinMode(incbutPin, INPUT_PULLUP);                          // Uso INPUT_PULLUP para simplificar el circuito, LÓGICA INVERTIDA
 
-  // Modo de inicio de los pines
+  // Modo de inicio de los pines ----------------------------------------------------------------------------------------
   digitalWrite(greenLEDpin, LOW);
   digitalWrite(yellowLEDpin, LOW);
   digitalWrite(redLEDpin, LOW);
   delay(esperaPinDig);                                       // Delay de cortesía para cambiar estados digitales por la bajada de velocidad del reloj
 
-  // Interrupción por input en pin digital
+  // Interrupción por input en pin digital ------------------------------------------------------------------------------
   attachInterrupt(0, incbutAct, FALLING);                    // Añado la interrupción al pin 2, referido como INT0, para que ejectute la Interruption Service Routine (ISR) cuando haya un flanco descendente (por ser INPUT_PULLUP, al presionar pasa de 1 a 0)
 
   delay(esperaSerial);
@@ -103,7 +104,7 @@ void loop() {
 
         salCount = 0;                                        // Reinicio la máquina de estados
       }
-      else if(digitalRead(incbutPin) == !HIGH){              // Si por el contrario, se detencta el switch de inclinación en HIGH, es que le eché sal
+      else if(digitalRead(incbutPin) == !HIGH){              // Si por el contrario, se detecta el switch de inclinación en !HIGH, es que le eché sal
         Serial.println("Segunda vez echada");
         delay(esperaSerial);
 
