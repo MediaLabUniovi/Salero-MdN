@@ -26,7 +26,7 @@ const uint16_t espera         = 30000/prescaler;             // Intervalo de esp
 const uint16_t esperaSerial   = 100/prescaler;               // Intevalo de espera antes de un serial print
 const uint16_t esperaPinDig   = 100/prescaler;               // Intervalo de espera después de cambio de estado de pin digital
 
-// Declaración e inicialización de variables
+// Declaración e inicialización de variables ----------------------------------------------------------------------------
 uint8_t        salCount       = 0;                           // Indicador de cuántas veces se ha echado sal
 unsigned long  previousMillis = 0;                           // Variable para guardar el estado previo de la función millis
 
@@ -96,11 +96,11 @@ void loop() {
         digitalWrite(greenLEDpin, LOW);                      // Apago el LED (o LEDs acumulados posteriormente)
         delay(esperaPinDig);
 
-        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
+        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
         Serial.println("¡Me he despertado!");
         delay(esperaSerial);
-        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 --------------------------------------------------------
+        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         salCount = 0;                                        // Reinicio la máquina de estados
       }
@@ -128,11 +128,11 @@ void loop() {
         digitalWrite(yellowLEDpin, LOW);
         delay(esperaPinDig);
 
-        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
+        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
         Serial.println("¡Me he despertado!");
         delay(esperaSerial);
-        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 --------------------------------------------------------
+        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         salCount = 0;
       }
@@ -161,11 +161,11 @@ void loop() {
         digitalWrite(redLEDpin, LOW);
         delay(esperaPinDig);
 
-        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ----------------------------------------------
+        // ME VOY A DEEP SLEEP HASTA QUE HAYA UNA INTERRUPCIÓN EN EL PIN 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
         delay(esperaSerial);
         Serial.println("¡Me he despertado!");
-        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 --------------------------------------------------------
+        // ME DESPIERTO PORQUE HUBO UNA INTERRUPCIÓN EN EL PIN 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         salCount = 0;
       }                                
