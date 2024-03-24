@@ -79,17 +79,17 @@ ___
 
 ```mermaid
 graph TD;
-  A[Configuración inicial: LEDs apagados] -->|1| B(Se echó sal)
+  A[Configuración inicial: LEDs apagados] -->|1| B(Se echa sal)
   G -->|15| S(Sleep mode)
   S -->|16| T(INTERRUPCIÓN)
   T -->|17| B
   B -->|2| H(Se enciende el primer LED)
-  H -->|3| I(¿Se echó sal mas de 1 vez en la última hora?)
+  H -->|3| I(¿Se echó sal de nuevo en la última hora?)
   I -->|4| J(Sí)
   I -->|5| K(No)
   K -->|12| G(Se apagan los LEDs)
   J -->|6| L(Se añade el segundo LED)
-  L -->|7| M(¿Se echó sal mas de 2 veces en la última hora?)
+  L -->|7| M(¿Se echó sal de nuevo en la última hora?)
   M -->|8| N(Sí)
   M -->|10| O(No)
   N -->|9| P(Se añade el tercer LED)
@@ -161,4 +161,4 @@ ___
 </div>
 <br/>
 
-_<p align="justify"> Autores: Daniel Rodríguez Moya y el grupo de trabajo de TicLab Jóven Ocúpate, Mar de Niebla :shipit: </p>_
+_<p align="justify"> Autores: Daniel Rodríguez Moya, medialab\_, y el grupo de trabajo de TicLab Jóven Ocúpate, Mar de Niebla :shipit: </p>_
