@@ -22,16 +22,16 @@ _Hecho con_
 ___
 
 ## Índice
-- Introducción
-- Modo de funcionamiento
-- Lista de componentes
-- Esquemático
-- PCB personalizada
-- Flujograma
-- Carcasa a medida
-- Modo de implementación
-- Licencia
-- Contacto
+- [Introducción](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#introducci%C3%B3n)
+- [Modo de funcionamiento](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#modo-de-funcionamiento)
+- [Lista de componentes](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#--lista-de-componentes-)
+- [Esquemático](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#esquem%C3%A1tico)
+- [PCB personalizada](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#pcb-personalizada)
+- [Flujograma](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#-flujograma-)
+- [Carcasa a medida](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#carcasa-a-medida)
+- [Modo de implementación](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#-modo-de-implementaci%C3%B3n-)
+- [Licencia](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#-licencia-)
+- [Contacto](https://github.com/99danirmoya/Salero-MdN/tree/main?tab=readme-ov-file#-contacto-)
 
 ___
 
