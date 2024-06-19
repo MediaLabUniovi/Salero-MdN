@@ -60,14 +60,14 @@ ___
 
 ___
 
-## Diagrama de conexiones
+## Esquemático
 
-A continuación, se muestra el diagrama de conexiones:
+A continuación, se muestra el esquemático para consultar conexiones:
 
 </div>
 
 <div align="center">
-  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/salero_schematic.png" width="450"  style="margin: 10px;"/>
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_1926_easyeda.com.jpeg" width="1000"  style="margin: 10px;"/>
   
   <em>Salero memorístico</em>
 </div>
