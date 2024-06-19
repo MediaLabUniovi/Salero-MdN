@@ -42,7 +42,7 @@ ___
 | Componente | Unidades |
 | ------------- | ------------- |
 | Arduino NANO | 1 |
-| Protoboard | 1 |
+| [PCB](https://github.com/99danirmoya/Salero-MdN/blob/main/pcb) | 1 |
 | Botón de inclinación | 1 |
 | Botón | 1 |
 | LED verde | 1 |
