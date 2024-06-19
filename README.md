@@ -34,7 +34,9 @@ ___
 ___
 
 ## Introducción
-Con el fin de cumplir objetivos de Jóven ocúpate reto TicLab 2024, el equipo de Mar de Niebla se puso en contacto con MediaLab UniOvi para colaborar en el desarrollo de dispositivos electrónicos que ayudásen a nuestros mayores. De esta manera, uno de los prototipos propuestos ha sido un salero que sea capaz de saber cuándo está siendo usado para encender un contador LED que notifique al usuario de cuántas veces ha sido usado durante la comida que esté cocinando. Se ha tenido en cuenta que el máximo saludable es de 6 gramos de sal al día, por lo que el modelador 3D ha sido diseñado para que dispense 1 gramo por aplicación de sal, siendo tres aplicaciones en el almuerzo y otras tres para la cena.
+Con el fin de cumplir objetivos de Jóven ocúpate reto TicLab 2024, el equipo de Mar de Niebla se puso en contacto con MediaLab UniOvi para colaborar en el desarrollo de dispositivos electrónicos que ayudásen a nuestros mayores.
+
+De esta manera, uno de los prototipos propuestos ha sido un salero que sea capaz de saber cuándo está siendo usado para encender un contador LED que notifique al usuario de cuántas veces ha sido usado durante la comida que esté cocinando. Se ha tenido en cuenta que el máximo saludable es de 6 gramos de sal al día, por lo que el modelador 3D ha sido diseñado para que dispense 1 gramo por aplicación de sal, siendo tres aplicaciones en el almuerzo y otras tres para la cena.
 
 Además, se ha implementado un modo de bajo consumo para dar una autonomía de más de un mes y batería recargable. Todos los componentes se colocan sobre una PCB a medida que se fija al modelado 3D para crear un dispositivo robusto y duradero.
 
