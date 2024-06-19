@@ -75,6 +75,21 @@ A continuación, se muestra el diagrama de conexiones:
 
 ___
 
+## PCB personalizada
+
+En la carpeta [`pcb`](https://github.com/99danirmoya/Salero-MdN/tree/main/pcb) se encuentran los archivos Gerber para su fabricación:
+
+<div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_183655_easyeda.com.jpeg" width="600"  style="margin: 10px;"/>
+</div>
+<br/>
+<div align="center">
+  <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_183749_easyeda.com.jpeg" width="600"  style="margin: 10px;"/>
+</div>
+<br/>
+
+___
+
 ### <p align="justify"> Flujograma (¡Simplificado!) </p>
 
 ```mermaid
