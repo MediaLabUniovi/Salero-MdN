@@ -99,7 +99,7 @@ ___
 
 ## PCB personalizada
 
-En la carpeta [`pcb`](https://github.com/99danirmoya/Salero-MdN/tree/main/pcb) se encuentran los archivos Gerber para su fabricación:
+En la carpeta [`Salero-MdN/tree/main/pcb`](https://github.com/99danirmoya/Salero-MdN/tree/main/pcb) se encuentran los archivos Gerber para su fabricación:
 
 <div align="center">
   <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_183655_easyeda.com.jpeg" width="600"  style="margin: 10px;"/>
@@ -143,7 +143,13 @@ graph TD;
 
 ___
 
+<div align="justify">
+
 ## Carcasa a medida
+
+En la carpeta [`Salero-MdN/tree/main/housing`](https://github.com/99danirmoya/Salero-MdN/tree/main/housing) se incluyen los tres archivos ".stl" que se muestran a continuación:
+
+</div>
 
 <div align="center">
   <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot%202024-03-11%20191934.png" width="600"  style="margin: 10px;"/>
@@ -175,7 +181,7 @@ ___
 
 <div align="justify">
 
-Toda la explicación del código de Arduino viene dada en el mismo, [`99danirmoya/Salero-MdN/blob/main/src/main.cpp`](https://github.com/99danirmoya/Salero-MdN/blob/main/src/main.cpp), en formato de comentarios al lado de cada línea
+Toda la explicación del código de Arduino viene dada en el mismo, [`99danirmoya/Salero-MdN/tree/main/src/main.cpp`](https://github.com/99danirmoya/Salero-MdN/blob/main/src/main.cpp), en formato de comentarios al lado de cada línea
 
 </div>
 
