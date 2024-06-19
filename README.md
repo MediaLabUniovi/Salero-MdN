@@ -52,7 +52,6 @@ ___
 | Batería 18650 | 1 |
 | Porta-batería | 1 |
 | TP4056 | 1 |
-| Jumpers | Los que hagan falta |
 
 </div>
 
