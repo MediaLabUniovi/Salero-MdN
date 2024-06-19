@@ -26,8 +26,6 @@ Con el fin de cumplir objetivos con el reto Jóven ocúpate TicLab, el equipo de
 
 Además, se ha implementado un modo de bajo consumo para dar una autonomía de más de un mes y batería recargable. Todos los componentes se colocan sobre una PCB a medida que se fija al modelado 3D para crear un dispositivo robusto y duradero.
 
-___
-
 </div>
 
 <div align="justify">
