@@ -41,12 +41,12 @@ ___
 1. Si se usa, se añade el tercer LED indicando la tercera y última aplicación de sal. Obligatoriamente se temporiza 1 hora con ellos encendidos para apagarse y entrar en sleep mode después
 1. Se reinicia la cuenta dándose por entendido que la siguiente vez que se use el salero, será para la siguiente comida/cena
 
+</div>
+
 > [!WARNING]
 > El salero siempre está encendido dado su bajo consumo de batería. Si se retira la batería, no volverá a funcionar hasta que se le ponga la batería de nuevo, se conecte a un cargador, o ambas. Desde ese momento, se iniciará automáticamente
 
 ___
-
-</div>
 
 ## <p align="justify">  Lista de componentes </p>
 
