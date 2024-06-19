@@ -68,7 +68,7 @@ A continuación, se muestra el esquemático para consultar conexiones:
 <div align="center">
   <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_1926_easyeda.com.jpeg" width="1000"  style="margin: 10px;"/>
   
-  <em>Salero memorístico</em>
+  <em>Esquemático del salero memorístico</em>
 </div>
 <br/>
 
@@ -80,10 +80,15 @@ En la carpeta [`pcb`](https://github.com/99danirmoya/Salero-MdN/tree/main/pcb) s
 
 <div align="center">
   <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_183655_easyeda.com.jpeg" width="600"  style="margin: 10px;"/>
+
+  <em>Vista posterior de la PCB</em>
 </div>
 <br/>
+
 <div align="center">
   <img src="https://github.com/99danirmoya/Salero-MdN/blob/main/pics/Screenshot_19-6-2024_183749_easyeda.com.jpeg" width="600"  style="margin: 10px;"/>
+
+  <em>Vista anterior de la PCB</em>
 </div>
 <br/>
 
